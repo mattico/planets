@@ -17,6 +17,9 @@ function love.load()
       2.7e-4*math.sqrt((GravConst * 1.989e30) / (500 * DistMult)))
   Planets['mercury'] = Planet:new("Mercury", love.graphics.newImage("gfx/mercure.png"), 328.5e21, 130, 0, 0, 
       3.7e-4*math.sqrt((GravConst * 1.989e30) / (500 * DistMult)), 0.7)
+  Planets['mars'] = Planet:new("Mars", love.graphics.newImage("gfx/mars.png"), 639e21, 320, 0, 0, 
+      2.5e-4*math.sqrt((GravConst * 1.989e30) / (500 * DistMult)), 0.85)
+    
   background = love.graphics.newImage("gfx/starfield.jpg")
   
   gui.group.default.size[1] = 150
@@ -40,7 +43,11 @@ function love.update(dt)
   gui.group{grow = "right", pos = {10, love.window.getHeight() - 30}, function()
     gui.Slider{info = speedSlider}
     gui.Label{text = string.format("%.1f", speedSlider.value^2 * 20)}
+    if gui.Button{text = "Reset"} then
+      love.load()
+    end
   end}
+  
   
   for _,planet in pairs(Planets) do
     planet:update(dt * 20 * speedSlider.value ^ 2, Planets)
