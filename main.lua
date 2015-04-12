@@ -1,6 +1,7 @@
 
 local class = require 'middleclass'
 local gui = require 'Quickie'
+local console = require 'console'
 
 local Planet = require 'planet'
 
@@ -25,6 +26,9 @@ function love.load()
   gui.group.default.size[1] = 150
   gui.group.default.size[2] = 25
   gui.group.default.spacing = 10
+  
+  console:Init()
+  console:Enable()
 end
 
 function love.draw()
@@ -47,7 +51,6 @@ function love.update(dt)
       love.load()
     end
   end}
-  
   
   for _,planet in pairs(Planets) do
     planet:update(dt * 20 * speedSlider.value ^ 2, Planets)
